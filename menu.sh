@@ -282,6 +282,15 @@ show_enable_status() {
     fi
 }
 
+check_enabled() {
+    temp=$(systemctl is-enabled XrayR)
+    if [[ x"${temp}" == x"enabled" ]]; then
+        return 0
+    else
+        return 1;
+    fi
+}
+
 show_menu() {
     echo -e "
   ${green}Menu hỗ trợ cài đặt nhanh，${plain}${red} không hoạt động với docker${plain}
