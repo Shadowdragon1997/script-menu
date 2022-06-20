@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+rm menu.sh
+clear
+wget https://raw.githubusercontent.com/Shadowdragon1997/script-menu/main/menu.sh
+chmod +x menu.sh
+clear
+bash menu.sh
