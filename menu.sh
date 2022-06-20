@@ -312,6 +312,27 @@ confirm() {
     fi
 }
 
+start() {
+    check_status
+    if [[ $? == 0 ]]; then
+        echo ""
+        echo -e "${green}AikoXrayR đã chạy rồi, không cần khởi động lại, nếu muốn khởi động lại, vui lòng chọn khởi động lại${plain}"
+    else
+        systemctl start XrayR
+        sleep 2
+        check_status
+        if [[ $? == 0 ]]; then
+            echo -e "${green}AikoXrayR đã khởi động thành công, vui lòng sử dụng nhật ký AikoXrayR để xem nhật ký đang chạy${plain}"
+        else
+            echo -e "${red}AikoXrayR có thể không khởi động được, vui lòng sử dụng nhật ký AikoXrayR để xem thông tin nhật ký sau này${plain}"
+        fi
+    fi
+
+    if [[ $# == 0 ]]; then
+        before_show_menu
+    fi
+}
+
 show_menu() {
     echo -e "
   ${green}Menu hỗ trợ cài đặt nhanh XrayR，${plain}${red}không hoạt động với docker${plain}
