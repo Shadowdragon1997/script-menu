@@ -291,6 +291,11 @@ check_enabled() {
     fi
 }
 
+before_show_menu() {
+    echo && echo -n -e "${yellow}Nhấn enter để quay lại menu chính: ${plain}" && read temp
+    show_menu
+}
+
 show_menu() {
     echo -e "
   ${green}Menu hỗ trợ cài đặt nhanh XrayR，${plain}${red}không hoạt động với docker${plain}
