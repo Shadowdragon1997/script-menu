@@ -293,7 +293,7 @@ check_enabled() {
 
 show_menu() {
     echo -e "
-  ${green}Menu hỗ trợ cài đặt nhanh，${plain}${red} không hoạt động với docker${plain}
+  ${green}Menu hỗ trợ cài đặt nhanh XrayR，${plain}${red}không hoạt động với docker${plain}
 --- https://github.com/AikoCute/XrayR ---
   ${green}0.${plain} Thoát Menu
 ————————————————
