@@ -296,6 +296,22 @@ before_show_menu() {
     show_menu
 }
 
+confirm() {
+    if [[ $# > 1 ]]; then
+        echo && read -p "$1 [Mặc định$2]: " temp
+        if [[ x"${temp}" == x"" ]]; then
+            temp=$2
+        fi
+    else
+        read -p "$1 [y/n]: " temp
+    fi
+    if [[ x"${temp}" == x"y" || x"${temp}" == x"Y" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 show_menu() {
     echo -e "
   ${green}Menu hỗ trợ cài đặt nhanh XrayR，${plain}${red}không hoạt động với docker${plain}
