@@ -273,6 +273,15 @@ show_status() {
     esac
 }
 
+show_enable_status() {
+    check_enabled
+    if [[ $? == 0 ]]; then
+        echo -e "Có tự động bắt đầu không: ${green}CÓ${plain}"
+    else
+        echo -e "Có tự động bắt đầu không: ${red}Không${plain}"
+    fi
+}
+
 show_menu() {
     echo -e "
   ${green}Menu hỗ trợ cài đặt nhanh，${plain}${red} không hoạt động với docker${plain}
