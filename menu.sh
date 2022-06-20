@@ -303,7 +303,7 @@ show_menu() {
         3) check_install && uninstall ;;
         4) check_install && status ;;
         5) check_install && show_log ;;
-        6) install_TLS ;
+        6) install_TLS ;;
         7) install_bbr ;;
         8) open_ports ;;
         9) benchmark ;;
