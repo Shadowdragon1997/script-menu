@@ -211,7 +211,7 @@ update_shell() {
         echo -e "${red}Không tải được script xuống, vui lòng kiểm tra xem máy có thể kết nối với Github không${plain}"
         before_show_menu
     else
-        chmod +x /usr/bin/XrayR
+        chmod +x /usr/bin/menu
         echo -e "${green}Tập lệnh nâng cấp thành công, vui lòng chạy lại tập lệnh${plain}" && exit 0
     fi
 }
