@@ -73,7 +73,7 @@ update() {
     fi
     bash <(curl -Ls https://raw.githubusercontent.com/Shadowdragon1997/script/main/updatedev.sh) $version
     if [[ $? == 0 ]]; then
-        echo -e "${green}Cập nhật hoàn tất, AikoXrayR đã được khởi động lại tự động, vui lòng sử dụng nhật ký XrayR để xem nhật ký chạy${plain}"
+        echo -e "${green}Cập nhật hoàn tất, AikoR đã được khởi động lại tự động, vui lòng sử dụng nhật ký AikoR để xem nhật ký chạy${plain}"
         exit
     fi
 
@@ -83,24 +83,24 @@ update() {
 }
 
 uninstall() {
-    confirm "Bạn có chắc chắn muốn gỡ cài đặt AikoXrayR không?" "n"
+    confirm "Bạn có chắc chắn muốn gỡ cài đặt AikoR không?" "n"
     if [[ $? != 0 ]]; then
         if [[ $# == 0 ]]; then
             show_menu
         fi
         return 0
     fi
-    systemctl stop XrayR
-    systemctl disable XrayR
-    rm /etc/systemd/system/XrayR.service -f
+    systemctl stop AikoR
+    systemctl disable AikoR
+    rm /etc/systemd/system/AikoR.service -f
     systemctl daemon-reload
     systemctl reset-failed
-    rm /etc/XrayR/ -rf
-    rm /usr/local/XrayR/ -rf
-    rm /usr/bin/XrayR -f
+    rm /etc/AikoR/ -rf
+    rm /usr/local/AikoR/ -rf
+    rm /usr/bin/AikoR -f
 
     echo ""
-    echo -e "${green} Đã gỡ thành công AikoXrayR hoàn toàn ${plain}"
+    echo -e "${green}Gỡ cài đặt thành công, đã gỡ cài đặt AikoR hoàn toàn khỏi hệ thống${plain}"
     echo ""
 
     if [[ $# == 0 ]]; then
@@ -109,14 +109,14 @@ uninstall() {
 }
 
 status() {
-    systemctl status XrayR --no-pager -l
+    systemctl status AikoR --no-pager -l
     if [[ $# == 0 ]]; then
         before_show_menu
     fi
 }
 
 show_log() {
-    journalctl -u XrayR.service -e --no-pager -f
+    journalctl -u AikoR.service -e --no-pager -f
     if [[ $# == 0 ]]; then
         before_show_menu
     fi
@@ -126,62 +126,62 @@ install_TLS() {
 read -p "Vui lòng chọn config CertFile và KeyFile: " choose_node
 
 if [ "$choose_node" == "quabnv_1" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt1/vt1.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt1/vt1.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt1/vt1.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt1/vt1.privkey.pem -O /etc/AikoR/privkey.pem
 
 elif [ "$choose_node" == "quabnv_2" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt2/vt2.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt2/vt2.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt2/vt2.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/quabnv/pem/vt2/vt2.privkey.pem -O /etc/AikoR/privkey.pem
       
 elif [ "$choose_node" == "khoa_1" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt1/vt1.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt1/vt1.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt1/vt1.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt1/vt1.privkey.pem -O /etc/AikoR/privkey.pem
       
 elif [ "$choose_node" == "khoa_2" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt2/vt2.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt2/vt2.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt2/vt2.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt2/vt2.privkey.pem -O /etc/AikoR/privkey.pem
 
 elif [ "$choose_node" == "khoa_3" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt3/vt3.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt3/vt3.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt3/vt3.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt3/vt3.privkey.pem -O /etc/AikoR/privkey.pem
 
 elif [ "$choose_node" == "khoa_4" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt4/vt4.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt4/vt4.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt4/vt4.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt4/vt4.privkey.pem -O /etc/AikoR/privkey.pem
       
 elif [ "$choose_node" == "khoa_5" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt5/vt5.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt5/vt5.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt5/vt5.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt5/vt5.privkey.pem -O /etc/AikoR/privkey.pem
 
 elif [ "$choose_node" == "khoa_6" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt6/vt6.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt6/vt6.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt6/vt6.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt6/vt6.privkey.pem -O /etc/AikoR/privkey.pem
       
 elif [ "$choose_node" == "khoa_7" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt7/vt7.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt7/vt7.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt7/vt7.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/vt7/vt7.privkey.pem -O /etc/AikoR/privkey.pem
       
 elif [ "$choose_node" == "khoa_gaming_1" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming1/gaming1.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming1/gaming1.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming1/gaming1.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming1/gaming1.privkey.pem -O /etc/AikoR/privkey.pem
 
 elif [ "$choose_node" == "khoa_gaming_2" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming2/gaming2.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming2/gaming2.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming2/gaming2.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming2/gaming2.privkey.pem -O /etc/AikoR/privkey.pem
 
 elif [ "$choose_node" == "khoa_gaming_3" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming3/gaming3.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming3/gaming3.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming3/gaming3.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/gaming3/gaming3.privkey.pem -O /etc/AikoR/privkey.pem
 
 elif [ "$choose_node" == "khoa_router_1" ]; then
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/router1/router1.pem -O /etc/XrayR/server.pem
-      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/router1/router1.privkey.pem -O /etc/XrayR/privkey.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/router1/router1.pem -O /etc/AikoR/server.pem
+      wget https://raw.githubusercontent.com/Shadowdragon1997/pem_key/anhkhoa/pem/router1/router1.privkey.pem -O /etc/AikoR/privkey.pem
 
 fi
 }
 
 install_bbr() {
-    bash <(curl -L -s https://raw.githubusercontent.com/AikoCute/BBR-1/aiko/tcp.sh)
+    bash <(curl -L -s https://raw.githubusercontent.com/AikoCute-Offical/Linux-BBR/aiko/tcp.sh)
 }
 
 open_ports() {
@@ -217,10 +217,10 @@ update_shell() {
 }
 
 check_install() {
-    check_status
+    ccheck_status
     if [[ $? == 2 ]]; then
         echo ""
-        echo -e "${red}Vui lòng cài đặt AikoXrayR trước${plain}"
+        echo -e "${red} Vui lòng cài đặt AikoR trước ${plain}"
         if [[ $# == 0 ]]; then
             before_show_menu
         fi
@@ -234,7 +234,7 @@ check_uninstall() {
     check_status
     if [[ $? != 2 ]]; then
         echo ""
-        echo -e "${red}AikoXrayR đã được cài đặt, vui lòng không cài đặt lại${plain}"
+        echo -e "${red} AikoR đã được cài đặt, vui lòng không cài đặt lại ${plain}"
         if [[ $# == 0 ]]; then
             before_show_menu
         fi
@@ -246,10 +246,10 @@ check_uninstall() {
 
 # 0: running, 1: not running, 2: not installed
 check_status() {
-    if [[ ! -f /etc/systemd/system/XrayR.service ]]; then
+    if [[ ! -f /etc/systemd/system/AikoR.service ]]; then
         return 2
     fi
-    temp=$(systemctl status XrayR | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+    temp=$(systemctl status AikoR | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
     if [[ x"${temp}" == x"running" ]]; then
         return 0
     else
@@ -261,15 +261,15 @@ show_status() {
     check_status
     case $? in
         0)
-            echo -e "Trạng thái AikoXrayR: ${green}Đã được chạy${plain}"
+            echo -e "Trạng thái AikoR: ${green}Đã được chạy${plain}"
             show_enable_status
             ;;
         1)
-            echo -e "Trạng thái AikoXrayR: ${yellow}Không được chạy${plain}"
+            echo -e "Trạng thái AikoR: ${yellow}Không được chạy${plain}"
             show_enable_status
             ;;
         2)
-            echo -e "Trạng thái AikoXrayR: ${red}Chưa cài đặt${plain}"
+            echo -e "Trạng thái AikoR: ${red}Chưa cài đặt${plain}"
     esac
 }
 
@@ -283,7 +283,7 @@ show_enable_status() {
 }
 
 check_enabled() {
-    temp=$(systemctl is-enabled XrayR)
+    temp=$(systemctl is-enabled AikoR)
     if [[ x"${temp}" == x"enabled" ]]; then
         return 0
     else
@@ -316,15 +316,15 @@ start() {
     check_status
     if [[ $? == 0 ]]; then
         echo ""
-        echo -e "${green}AikoXrayR đã chạy rồi, không cần khởi động lại, nếu muốn khởi động lại, vui lòng chọn khởi động lại${plain}"
+        echo -e "${green}AikoR đã chạy rồi, không cần khởi động lại, nếu muốn khởi động lại, vui lòng chọn khởi động lại${plain}"
     else
-        systemctl start XrayR
+        systemctl start AikoR
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
-            echo -e "${green}AikoXrayR đã khởi động thành công, vui lòng sử dụng nhật ký AikoXrayR để xem nhật ký đang chạy${plain}"
+            echo -e "${green}AikoR đã khởi động thành công, vui lòng sử dụng xem nhật ký AikoR để xem nhật ký đang chạy${plain}"
         else
-            echo -e "${red}AikoXrayR có thể không khởi động được, vui lòng sử dụng nhật ký AikoXrayR để xem thông tin nhật ký sau này${plain}"
+            echo -e "${red}AikoR có thể không khởi động được, vui lòng sử dụng xem nhật ký AikoR để xem thông tin nhật ký sau này${plain}"
         fi
     fi
 
@@ -335,15 +335,15 @@ start() {
 
 show_menu() {
     echo -e "
-  ${green}Menu hỗ trợ cài đặt nhanh XrayR，${plain}${red}không hoạt động với docker${plain}
---- https://github.com/AikoCute/XrayR ---
+  ${green}Menu hỗ trợ cài đặt nhanh AikoR，${plain}${red}không hoạt động với docker${plain}
+--- https://github.com/AikoCute-Offical/AikoR ---
   ${green}0.${plain} Thoát Menu
 ————————————————
-  ${green}1.${plain} Cài đặt AikoXrayR
-  ${green}2.${plain} Cập nhật AikoXrayR
-  ${green}3.${plain} Gỡ cài đặt AikoXrayR
-  ${green}4.${plain} Xem trạng thái AikoXrayR
-  ${green}5.${plain} Xem nhật ký AikoXrayR (log)
+  ${green}1.${plain} Cài đặt AikoR
+  ${green}2.${plain} Cập nhật AikoR
+  ${green}3.${plain} Gỡ cài đặt AikoR
+  ${green}4.${plain} Xem trạng thái AikoR
+  ${green}5.${plain} Xem nhật ký AikoR (log)
 ————————————————
   ${green}6.${plain} Cài đặt chứng chỉ TLS
   ${green}7.${plain} Một cú nhấp chuột cài đặt bbr (hạt nhân mới nhất)
@@ -380,7 +380,7 @@ if [[ $# > 0 ]]; then
         "update") check_install 0 && update 0 $2 ;;
         "install") check_uninstall 0 && install 0 ;;
         "uninstall") check_install 0 && uninstall 0 ;;
-        "version") check_install 0 && show_XrayR_version 0 ;;
+        "version") check_install 0 && show_AikoR_version 0 ;;
         "update_shell") update_shell ;;
         "benchmark") benchmark ;;
         "bbr") install_bbr ;;
